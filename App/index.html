@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html >
+<head>
+
+	<title>
+		Learning angular js
+	</title>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/controller.js"></script>
+
+</head>
+
+<body data-ng-app="mainApp">
+	Learning Angular js to sharp skills
+
+	<h1>AngularJS App Starter {{5+8}}</h1>
+
+	<div data-ng-controller="MainCtrl as ctrl">
+
+		<div data-ng-repeat="note in ctrl.notes">
+			<span>{{note.id}}</span>
+			<span>{{note.label}}</span>
+			<span>{{note.done}}</span>
+			<br>
+		</div>
+
+		<input type="text" data-ng-model="ctrl.username">
+		<input type="password" data-ng-model="ctrl.password">
+		<button data-ng-click="ctrl.change()">Change values</button>
+		<button data-ng-click="ctrl.submit()">Submit</button>
+		
+	</div>
+
+</body>
+</html>
