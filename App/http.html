@@ -23,42 +23,46 @@
 	<div  ng-controller="MainCtrl as mainCtrl">
 
 		<h1>Hello Servers</h1>
-
-		<form name="personForm" ng-submit="mainCtrl.addPerson()">
+		<span>{{mainCtrl.error}}</span>
+		<form name="productForm" ng-submit="mainCtrl.addProduct()">
 			<input type="text"
 			placeholder="ID"
-			ng-model="mainCtrl.newPerson.id"
-			required>
+			ng-model="mainCtrl.newProduct.id"
+			required><br>
 
 			<input type="text"
 			placeholder="Name"
-			ng-model="mainCtrl.newPerson.name"
-			required>
+			ng-model="mainCtrl.newProduct.name"
+			required><br>
 
 			<input type="text"
 			placeholder="Location"
-			ng-model="mainCtrl.newPerson.location"
-			required>
+			ng-model="mainCtrl.newProduct.location"
+			required><br>
 
 			<input type="submit"
 			value="Add"
-			ng-disabled="personForm.$invalid">
+			ng-disabled="productForm.$invalid">
 		</form>
 
-		<div>
-			<span ng-bind="mainCtrl.person.id"></span>
-			<span ng-bind="mainCtrl.person.name"></span>
-			<span ng-bind="mainCtrl.person.location"></span>
-		</div>
-
 		<table>
-			<tr ng-repeat="person in mainCtrl.persons" >
-				<td ng-bind="person.id" class="item"></td>
-				<td ng-bind="person.name" class="item"></td>
-				<td ng-bind="person.location" class="item"></td>
-				<td ng-click="mainCtrl.getPerson(person.id)"><a href="#">{{person.id}}</a></td>
+			<tr ng-repeat="product in mainCtrl.products" >
+				<td ng-bind="product.id" class="item"></td>
+				<td ng-bind="product.name" class="item"></td>
+				<td ng-bind="product.rate" class="item"></td>
+				<td ng-bind="product.quantity" class="item"></td>
+				<td ng-bind="product.company" class="item"></td>
+				<td ng-bind="product.updateDate" class="item"></td>
+				<td ng-click="mainCtrl.getPerson(product.id)"><a href="#">{{product.id}}</a></td>
 			</tr>
 		</table>
+
+
+		<div ng-show="mainCtrl.editProduct">
+			ID: <span ng-bind="mainCtrl.editProduct.id"></span><br>
+			Name: <span ng-bind="mainCtrl.editProduct.name"></span><br>
+			Location: <span ng-bind="mainCtrl.editProduct.location"></span>
+		</div>
 
 	</div>
 </div>

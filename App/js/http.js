@@ -12,17 +12,17 @@ angular.module('notesApp', [])
 
         var self = this;
 
-        self.persons = [];
+        self.products = [];
 
-        self.newPerson={};
+        self.newProduct ={};
 
-        var getPersonList = function(){
+        var getProductList = function(){
 
-                var urlPersons = 'http://localhost:8081/RESTService/api/person';
+                var urlProducts = 'http://localhost:8081/RESTService/api/product';
 
-                $http.get(urlPersons).then(function(response){
+                $http.get(urlProducts).then(function(response){
 
-                        self.persons = response.data;
+                        self.products = response.data;
 
                 },function(data){
 
@@ -30,17 +30,17 @@ angular.module('notesApp', [])
                 });
         };
 
-        getPersonList();               
+        getProductList();               
 
         self.getPerson = function(id){
 
-                var urlPerson = 'http://localhost:8081/RESTService/api/person/'+id;
+                var urlProduct = 'http://localhost:8081/RESTService/api/product/'+id;
 
-                $http.get(urlPerson).success(function(data){
+                $http.get(urlProduct).success(function(data){
 
-                        self.person = data;
+                        self.editProduct = data;
 
-                        $log.log(self.person);
+                        $log.log(self.editProduct);
 
                 }).error(function(data){
 
@@ -49,13 +49,12 @@ angular.module('notesApp', [])
                 });
         };
 
-        self.addPerson = function(){
+        self.addProduct = function(){
 
-                $http.post('http://localhost:8081/RESTService/api/person', self.newPerson)
-                .then(getPersonList)
+                $http.post('http://localhost:8081/RESTService/api/product', self.newProduct )
+                .then(getProductList)
                 .then(function(response){
-                        self.newPerson={};
-
+                        self.newProduct ={};
                 });
         };
 }]);

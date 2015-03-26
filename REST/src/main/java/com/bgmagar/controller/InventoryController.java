@@ -12,37 +12,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bgmagar.domain.Person;
-import com.bgmagar.service.PersonService;
+import com.bgmagar.domain.Product;
+import com.bgmagar.service.ProductService;
 
 @RestController
 @RequestMapping("/api")
-public class PersonController {
+public class InventoryController {
 	
 	@Autowired
-	private PersonService personService;
+	private ProductService productService;
 	
-	List<Person> pList = new ArrayList<Person>();
+	List<Product> pList = new ArrayList<Product>();
 	
 	/**
 	 * @return list of person
 	 */
-	@RequestMapping(value="/person", method=RequestMethod.GET)
-	private List<Person> getPerson() {
+	@RequestMapping(value="/product", method=RequestMethod.GET)
+	private List<Product> getPerson() {
 		
-		return pList;
+		return productService.getProductList();
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * Add person to the list
 	 * @return HttpStatus.OK
 	 */
-	@RequestMapping(value="/person", method=RequestMethod.POST)
-	private ResponseEntity<Person> setPerson(@RequestBody Person person) {
+	@RequestMapping(value="/product", method=RequestMethod.POST)
+	private ResponseEntity<Product> setPerson(@RequestBody Product person) {
 		
-		pList.add(person);
+
 		
-		return new ResponseEntity<Person>(HttpStatus.OK);
+		return new ResponseEntity<Product>(HttpStatus.OK);
 		
 	}
 	
@@ -52,10 +63,14 @@ public class PersonController {
 	 * @return person associated with @param id
 	 */
 	@RequestMapping(value="/person/{id}", method=RequestMethod.GET)
-	private Person getPerson(@PathVariable int id) {
-		 
-		return personService.getPerson(id);
-		
+	private Product getPerson(@PathVariable int id) {
+		Product p1 = null;
+		for(Product p : pList){
+			if(id == p.getId()){
+				p1 = p;
+			}
+		}
+		return p1;
 	}
 	
 	/**
@@ -65,9 +80,9 @@ public class PersonController {
 	 * @return HttpStatus.OK
 	 */
 	@RequestMapping(value="/person/{id}", method=RequestMethod.POST)
-	private ResponseEntity<Person> updatePerson(@PathVariable int id) {
+	private ResponseEntity<Product> updatePerson(@PathVariable int id) {
 		
-		return new ResponseEntity<Person>(HttpStatus.OK);
+		return new ResponseEntity<Product>(HttpStatus.OK);
 		
 	}
 
