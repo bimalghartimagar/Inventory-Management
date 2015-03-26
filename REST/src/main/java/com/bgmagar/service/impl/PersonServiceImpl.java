@@ -11,8 +11,8 @@ public class PersonServiceImpl implements PersonService{
 	public Person getPerson(int id) {
 		Person p = new Person();
 		p.setId(id);
-		p.setName("name Test " + id);
-		p.setLocation("Location test" + id);
+		p.setName("name Test " + id*2);
+		p.setLocation("Location test" + id*3);
 		return p;
 	}
 

@@ -34,7 +34,8 @@ public class PersonController {
 	}
 	
 	/**
-	 * @return
+	 * Add person to the list
+	 * @return HttpStatus.OK
 	 */
 	@RequestMapping(value="/person", method=RequestMethod.POST)
 	private ResponseEntity<Person> setPerson(@RequestBody Person person) {
@@ -45,6 +46,11 @@ public class PersonController {
 		
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return person associated with @param id
+	 */
 	@RequestMapping(value="/person/{id}", method=RequestMethod.GET)
 	private Person getPerson(@PathVariable int id) {
 		 
@@ -52,10 +58,16 @@ public class PersonController {
 		
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * Update detail of person associated with @param id
+	 * @return HttpStatus.OK
+	 */
 	@RequestMapping(value="/person/{id}", method=RequestMethod.POST)
-	private Person updatePerson(@PathVariable int id) {
+	private ResponseEntity<Person> updatePerson(@PathVariable int id) {
 		
-		return personService.getPerson(id);
+		return new ResponseEntity<Person>(HttpStatus.OK);
 		
 	}
 
