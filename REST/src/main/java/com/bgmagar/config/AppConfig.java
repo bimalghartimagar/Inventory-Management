@@ -1,7 +1,5 @@
 package com.bgmagar.config;
 
-import java.io.ObjectInputStream.GetField;
-
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +47,5 @@ public class AppConfig {
 	public ProductService getProductService(){
 		return new ProductServiceImpl();
 	}
-	
 
 }
