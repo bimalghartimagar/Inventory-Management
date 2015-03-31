@@ -11,4 +11,6 @@ import com.bgmagar.domain.Product;
 public interface ProductDao {
 
 	public List<Product> getProductList();
+	
+	public Product getProduct(int i);
 }

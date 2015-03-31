@@ -20,4 +20,9 @@ public class ProductDaoImpl implements ProductDao {
 		return jdbcTemplate.query("SELECT ID, NAME, RATE, QUANTITY, COMPANY, DESCRIPTION, UPDATE_DATE FROM product", new ProductMapper());
 	}
 
+	@Override
+	public Product getProduct(int id) {
+		return jdbcTemplate.queryForObject("SELECT ID, NAME, RATE, QUANTITY, COMPANY, DESCRIPTION, UPDATE_DATE FROM product WHERE ID=?", new Object[]{id},new ProductMapper());
+	}
+
 }

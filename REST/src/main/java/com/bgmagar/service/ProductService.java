@@ -7,5 +7,7 @@ import com.bgmagar.domain.Product;
 public interface ProductService {
 
 	public List<Product> getProductList();
+	
+	public Product getProduct(int id);
 
 }

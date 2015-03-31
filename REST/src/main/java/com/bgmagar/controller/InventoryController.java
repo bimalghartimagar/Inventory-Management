@@ -62,15 +62,10 @@ public class InventoryController {
 	 * @param id
 	 * @return person associated with @param id
 	 */
-	@RequestMapping(value="/person/{id}", method=RequestMethod.GET)
-	private Product getPerson(@PathVariable int id) {
-		Product p1 = null;
-		for(Product p : pList){
-			if(id == p.getId()){
-				p1 = p;
-			}
-		}
-		return p1;
+	@RequestMapping(value="/product/{id}", method=RequestMethod.GET)
+	private Product getProduct(@PathVariable int id) {
+		return productService.getProduct(id);
+		
 	}
 	
 	/**

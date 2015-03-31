@@ -32,7 +32,7 @@ angular.module('notesApp', [])
 
         getProductList();               
 
-        self.getPerson = function(id){
+        self.getProduct = function(id){
 
                 var urlProduct = 'http://localhost:8081/RESTService/api/product/'+id;
 
