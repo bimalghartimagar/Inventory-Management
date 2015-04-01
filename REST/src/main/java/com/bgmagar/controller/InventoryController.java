@@ -1,5 +1,11 @@
 package com.bgmagar.controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +22,7 @@ import com.bgmagar.domain.Product;
 import com.bgmagar.service.ProductService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/")
 public class InventoryController {
 	
 	@Autowired
@@ -24,31 +30,54 @@ public class InventoryController {
 	
 	List<Product> pList = new ArrayList<Product>();
 	
+	@RequestMapping(value={"/","/api"})
+	private String welcome() throws IOException{
+	
+		BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/help.html")));
+		
+		StringBuilder helpString = new StringBuilder();
+		
+		String part = "";
+		while((part = reader.readLine()) != null){
+			helpString.append(part);
+		}
+		
+		return helpString.toString();
+	}
+	
 	/**
-	 * @return list of person
+	 * @return list of product
 	 */
-	@RequestMapping(value="/product", method=RequestMethod.GET)
+	@RequestMapping(value="/api/product", method=RequestMethod.GET)
 	private List<Product> getPerson() {
 		
 		return productService.getProductList();
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return product associated with @param id
+	 */
+	@RequestMapping(value="/api/product/{id}", method=RequestMethod.GET)
+	private Product getProduct(@PathVariable int id) {
+		return productService.getProduct(id);
+		
+	}
 	
 	
 	
 	
-	
-	
-	
-	
-	
+	/**
+	 * TODO yet to be implemented methods below
+	 */
 	
 	
 	/**
 	 * Add person to the list
 	 * @return HttpStatus.OK
 	 */
-	@RequestMapping(value="/product", method=RequestMethod.POST)
+	@RequestMapping(value="/api/product", method=RequestMethod.POST)
 	private ResponseEntity<Product> setPerson(@RequestBody Product person) {
 		
 
@@ -57,16 +86,7 @@ public class InventoryController {
 		
 	}
 	
-	/**
-	 * 
-	 * @param id
-	 * @return person associated with @param id
-	 */
-	@RequestMapping(value="/product/{id}", method=RequestMethod.GET)
-	private Product getProduct(@PathVariable int id) {
-		return productService.getProduct(id);
-		
-	}
+
 	
 	/**
 	 * 
@@ -74,7 +94,7 @@ public class InventoryController {
 	 * Update detail of person associated with @param id
 	 * @return HttpStatus.OK
 	 */
-	@RequestMapping(value="/person/{id}", method=RequestMethod.POST)
+	@RequestMapping(value="/api/person/{id}", method=RequestMethod.POST)
 	private ResponseEntity<Product> updatePerson(@PathVariable int id) {
 		
 		return new ResponseEntity<Product>(HttpStatus.OK);

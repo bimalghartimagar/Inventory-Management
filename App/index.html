@@ -6,31 +6,32 @@
 	<title>
 		Learning angular js
 	</title>
-	<script type="text/javascript" src="js/angular.min.js"></script>
-	<script type="text/javascript" src="js/controller.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<script type="text/javascript" src="js/jquery-1.11.2.js"></script>
+	<script type="text/javascript" src="js/angular.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/services.js"></script>
+	<script type="text/javascript" src="js/controllers.js"></script>
 
 </head>
 
-<body data-ng-app="mainApp">
-	Learning Angular js to sharp skills
-
-	<h1>AngularJS App Starter {{5+8}}</h1>
-
-	<div data-ng-controller="MainCtrl as ctrl">
-
-		<div data-ng-repeat="note in ctrl.notes">
-			<span>{{note.id}}</span>
-			<span>{{note.label}}</span>
-			<span>{{note.done}}</span>
-			<br>
+<body data-ng-app="productApp" class="landing">
+	
+	<div class="top-bar" ng-controller="MainCtrl as mainCtrl">
+		<div class="pull-left">
+			<span><a href="#/">Products</a></span>
 		</div>
-
-		<input type="text" data-ng-model="ctrl.username">
-		<input type="password" data-ng-model="ctrl.password">
-		<button data-ng-click="ctrl.change()">Change values</button>
-		<button data-ng-click="ctrl.submit()">Submit</button>
-		
+		<div class="pull-right">
+			<span ng-hide="mainCtrl.userService.isLoggedIn">
+				<a href="#/login">Login</a>
+			</span>
+			<span ng-show="mainCtrl.userService.isLoggedIn">
+				<a href="/api/logout">Logout</a>
+			</span>
+		</div>
 	</div>
+
+	<div ng-view></div>
 
 </body>
 </html>

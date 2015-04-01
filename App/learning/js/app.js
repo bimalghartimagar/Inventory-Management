@@ -1,4 +1,4 @@
-angular.module('productApp', [])
+angular.module('notesApp', [])
 	.controller('MainCtrl', [function($log){
 		var self = this;
 

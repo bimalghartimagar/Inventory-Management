@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Learning</title>
+	<meta charset="UTF-8">
+
+	<style>
+		.item {
+			padding: 10px;
+		}
+	</style>
+
+	<link type="text/css" rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" src="js/angular.js"></script>
+	<script type="text/javascript" src="js/http.js"></script>
+
+</head>
+<body ng-app="notesApp">
+
+
+
+	<div  ng-controller="MainCtrl as mainCtrl">
+
+		<h1>Hello Servers</h1>
+		<span>{{mainCtrl.error}}</span>
+		<form name="productForm" ng-submit="mainCtrl.addProduct()">
+			ID: <input type="text"
+			placeholder="ID"
+			ng-model="mainCtrl.newProduct.id"
+			required><br>
+
+			Name: <input type="text"
+			placeholder="Name"
+			ng-model="mainCtrl.newProduct.name"
+			required><br>
+
+			<input type="text"
+			placeholder="Location"
+			ng-model="mainCtrl.newProduct.location"
+			required><br>
+
+			<input type="submit"
+			value="Add"
+			ng-disabled="productForm.$invalid">
+		</form>
+
+		<div ng-show="mainCtrl.editProduct">
+			<form name="updateForm" ng-submit="mainCtrl.updateProduct()">
+				<table>
+					<tr>
+						<td>ID:</td>
+						<td><input type="text" ng-model="mainCtrl.editProduct.id"></td>
+					</tr>
+					<tr>
+						<td>Name:</td>
+						<td><input type="text" ng-model="mainCtrl.editProduct.name"></td>
+					</tr>
+					<tr>
+						<td>Rate:</td>
+						<td><input type="text" ng-model="mainCtrl.editProduct.rate"></td>
+					</tr>
+					<tr>
+						<td>Quantity:</td>
+						<td><input type="text" ng-model="mainCtrl.editProduct.quantity"></td>
+					</tr>
+					<tr>
+						<td>Company:</td>
+						<td><input type="text" ng-model="mainCtrl.editProduct.company"></td>
+					</tr>
+					<tr>
+						<td>Updated:</td>
+						<td><input type="text" ng-model="mainCtrl.editProduct.updateDate"></td>
+					</tr>
+					<tr><td><input type="submit" value="Update"></td></tr>
+				</table>
+			</form>
+		</div>
+
+		<table>
+			<tr ng-repeat="product in mainCtrl.products" >
+				<td ng-bind="product.id" class="item"></td>
+				<td ng-click="mainCtrl.getProduct(product.id)" class="item"><a href="#">{{product.name}}</a></td>
+				<td ng-bind="product.rate" class="item"></td>
+				<td ng-bind="product.quantity" class="item"></td>
+				<td ng-bind="product.company" class="item"></td>
+				<td ng-bind="product.updateDate" class="item"></td>
+
+			</tr>
+		</table>
+
+
+		
+
+	</div>
+</div>
+</body>
+</html>
