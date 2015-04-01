@@ -19,9 +19,9 @@ import com.bgmagar.service.impl.ProductServiceImpl;
 @ComponentScan("com.bgmagar")
 @EnableWebMvc
 public class AppConfig {
-	
+
 	@Bean(name = "dataSource")
-	public DataSource getDataSource(){
+	public DataSource getDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/product_db");
@@ -29,23 +29,25 @@ public class AppConfig {
 		dataSource.setPassword("nepal@123");
 		return dataSource;
 	}
-	
+
 	@Autowired
 	@Bean(name = "jdbcTemplate")
-	public JdbcTemplate getJdbcTemplate(DataSource dataSource){
+	public JdbcTemplate getJdbcTemplate(DataSource dataSource) {
 		return new JdbcTemplate(dataSource);
 	}
-	
+
 	@Autowired
-	@Bean(name="productDao")
-	public ProductDao getProductDao(){
+	@Bean(name = "productDao")
+	public ProductDao getProductDao() {
 		return new ProductDaoImpl();
 	}
-	
+
 	@Autowired
-	@Bean(name="productService")
-	public ProductService getProductService(){
+	@Bean(name = "productService")
+	public ProductService getProductService() {
 		return new ProductServiceImpl();
 	}
+
+
 
 }

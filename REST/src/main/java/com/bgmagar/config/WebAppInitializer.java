@@ -6,7 +6,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 public class WebAppInitializer implements WebApplicationInitializer {
@@ -19,6 +21,8 @@ public class WebAppInitializer implements WebApplicationInitializer {
 		context.register(AppConfig.class);
 
 		context.setServletContext(servletContext);
+		
+		servletContext.addListener(new ContextLoaderListener(context));
 
 		Dynamic dynamic = servletContext.addServlet("dispatcher",
 				new DispatcherServlet(context));
@@ -31,6 +35,9 @@ public class WebAppInitializer implements WebApplicationInitializer {
 				new SimpleCORSFilter());
 
 		fr.addMappingForUrlPatterns(null, true, "/*");
+		
+		servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy("springSecurityFilterChain"))
+        .addMappingForUrlPatterns(null, false, "/api/*");
 
 	}
 
