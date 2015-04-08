@@ -36,8 +36,6 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
 		fr.addMappingForUrlPatterns(null, true, "/*");
 		
-		servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy("springSecurityFilterChain"))
-        .addMappingForUrlPatterns(null, false, "/api/*");
 
 	}
 
