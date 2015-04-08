@@ -1,0 +1,35 @@
+<form name="updateForm" ng-submit="productUpdateCtrl.updateProduct()">
+	<table>
+		<tr>
+			<td>ID</td>
+			<td><input type="text" ng-model="productUpdateCtrl.id"></td>
+		</tr>
+		<tr>
+			<td>Name:</td>
+			<td><input type="text" ng-model="productUpdateCtrl.product.name"></td>
+		</tr>
+		<tr>
+			<td>Rate:</td>
+			<td><input type="text" ng-model="productUpdateCtrl.product.rate"></td>
+		</tr>
+		<tr>
+			<td>Quantity:</td>
+			<td><input type="text" ng-model="productUpdateCtrl.product.quantity"></td>
+		</tr>
+		<tr>
+			<td>Company:</td>
+			<td><input type="text" ng-model="productUpdateCtrl.product.company"></td>
+		</tr>
+		<tr>
+			<td>Description:</td>
+			<td><textarea ng-bind="productUpdateCtrl.product.description"></textarea></td>
+		</tr>
+		<tr>
+			<td>Update Date:</td>
+			<td><input type="datetime" ng-model="productUpdateCtrl.product.updateDate"></td>
+		</tr>
+		<tr>
+			<td><input type="submit" value="Update"></td>
+		</tr>
+	</table>
+</form>

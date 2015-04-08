@@ -1,0 +1,27 @@
+<form name="addForm" ng-submit="productAddCtrl.addProduct()">
+	<table>
+		<tr>
+			<td>Name:</td>
+			<td><input type="text" ng-model="productAddCtrl.product.name"></td>
+		</tr>
+		<tr>
+			<td>Rate:</td>
+			<td><input type="text" ng-model="productAddCtrl.product.rate"></td>
+		</tr>
+		<tr>
+			<td>Quantity:</td>
+			<td><input type="text" ng-model="productAddCtrl.product.quantity"></td>
+		</tr>
+		<tr>
+			<td>Company:</td>
+			<td><input type="text" ng-model="productAddCtrl.product.company"></td>
+		</tr>
+		<tr>
+			<td>Description:</td>
+			<td><textarea  ng-model="productAddCtrl.product.description"></textarea></td>
+		</tr>
+		<tr>
+			<td><input type="submit" value="Add"></td>
+		</tr>
+	</table>
+</form>

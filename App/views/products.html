@@ -1,0 +1,59 @@
+	<h3>List Of Products</h3>
+	<div><a href="#/product/add">Add Product</a></div>
+	<table>
+		<thead>
+			<tr>
+				<th >
+					<a href ng-click="productListCtrl.fieldName='id'; reverseSort= !reverseSort">ID
+					<span ng-show="productListCtrl.fieldName == 'id'">
+					<span ng-show="!reverseSort">^</span>
+					<span ng-show="reverseSort">v</span>
+					</span>
+					</a>
+				</th>
+				<th>
+				<a href="#/products" ng-click="productListCtrl.fieldName='name'; reverseSort= !reverseSort">Name
+					<span ng-show="productListCtrl.fieldName == 'name'">
+					<span ng-show="!reverseSort">^</span>
+					<span ng-show="reverseSort">v</span>
+					</span>
+					</a>
+				</th>
+				<th>
+					<a href="#/products" ng-click="productListCtrl.fieldName='rate'; reverseSort= !reverseSort">Rate
+					<span ng-show="productListCtrl.fieldName == 'rate'">
+					<span ng-show="!reverseSort">^</span>
+					<span ng-show="reverseSort">v</span>
+					</span>
+					</a>
+				</th>
+				<th>				<a href="#/products" ng-click="productListCtrl.fieldName='quantity'; reverseSort= !reverseSort">Quantity
+					<span ng-show="productListCtrl.fieldName == 'quantity'">
+					<span ng-show="!reverseSort">^</span>
+					<span ng-show="reverseSort">v</span>
+					</span>
+					</a></th>
+				<th>				<a href="#/products" ng-click="productListCtrl.fieldName='company'; reverseSort= !reverseSort">Company
+					<span ng-show="productListCtrl.fieldName == 'company'">
+					<span ng-show="!reverseSort">^</span>
+					<span ng-show="reverseSort">v</span>
+					</span>
+					</a></th>
+				<th>				<a href="#/products" ng-click="productListCtrl.fieldName='updateDate'; reverseSort= !reverseSort">Updated
+					<span ng-show="productListCtrl.fieldName == 'updateDate'">
+					<span ng-show="!reverseSort">^</span>
+					<span ng-show="reverseSort">v</span>
+					</span>
+					</a></th>
+			</tr>
+		</thead>
+		<tr ng-repeat="product in productListCtrl.products|orderBy:productListCtrl.fieldName:reverseSort">
+			<td ng-bind="product.id"></td>
+			<td><a href="#/product/edit/{{product.id}}" ng-bind="product.name"></a></td>
+			<td ng-bind="product.rate"></td>
+			<td ng-bind="product.quantity"></td>
+			<td ng-bind="product.company"></td>
+			<td ng-bind="product.updateDate"></td>
+		</tr>
+
+	</table>
