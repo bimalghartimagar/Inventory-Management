@@ -4,9 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +29,11 @@ public class InventoryController {
 
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private HttpServletRequest request;
+	
+	static private Map<String, Integer> requestMap = new HashMap<String, Integer>();
 
 	List<Product> pList = new ArrayList<Product>();
 
@@ -39,6 +49,7 @@ public class InventoryController {
 		while ((part = reader.readLine()) != null) {
 			helpString.append(part);
 		}
+		System.out.println(request.getRemoteAddr());;
 
 		return helpString.toString();
 	}
@@ -47,9 +58,21 @@ public class InventoryController {
 	 * @return list of product
 	 */
 	@RequestMapping(value = "/api/product", method = RequestMethod.GET)
-	private List<Product> getProductList() {
+	private Map<String, Object> getProductList() {
+		
+		addRequest(request.getRemoteAddr());
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Map<Object,Object> metaMap = new HashMap<Object, Object>();
+		
+		map.put("products", productService.getProductList());
+		metaMap.put("totalRecords", productService.getProductList().size());
+		metaMap.put("page", 0);
 
-		return productService.getProductList();
+		map.put("meta",metaMap);
+		
+		return map;
 	}
 
 	/**
@@ -57,7 +80,8 @@ public class InventoryController {
 	 * @return product associated with @param id
 	 */
 	@RequestMapping(value = "/api/product/{id}", method = RequestMethod.GET)
-	private Product getProduct(@PathVariable int id) {
+	private Object getProduct(@PathVariable int id) {
+		addRequest(request.getLocalAddr());
 		return productService.getProduct(id);
 
 	}
@@ -89,6 +113,20 @@ public class InventoryController {
 
 		return new ResponseEntity<Product>(HttpStatus.OK);
 
+	}
+	
+	private void addRequest(String ip){
+		
+		if(requestMap.containsKey(ip)){
+			Integer requestCount = requestMap.get(ip);
+			requestCount++;
+			requestMap.put(ip, requestCount);
+			System.out.println("IP " + ip + " has sent request " + requestCount + " times");
+		}else{
+			requestMap.put(ip, 1);
+			System.out.println("IP " + ip + " has sent request first time");
+		}
+		
 	}
 
 }

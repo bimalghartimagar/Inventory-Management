@@ -18,7 +18,7 @@ self.click = function(){
 	self.reverseSort = false;
 
 	ProductService.getProducts().then(function(response){
-		self.products = response.data;
+		self.products = response.data.products;
 	})
 
 }])
