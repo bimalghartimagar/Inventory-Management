@@ -8,7 +8,6 @@ import javax.servlet.ServletRegistration.Dynamic;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 public class WebAppInitializer implements WebApplicationInitializer {

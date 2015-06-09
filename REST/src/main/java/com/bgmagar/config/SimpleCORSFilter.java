@@ -18,7 +18,6 @@ public class SimpleCORSFilter implements Filter{
 	private static int i = 0;
 
 	public void init(FilterConfig filterConfig) throws ServletException {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -35,7 +34,6 @@ public class SimpleCORSFilter implements Filter{
 	}
 
 	public void destroy() {
-		// TODO Auto-generated method stub
 		
 	}
 
