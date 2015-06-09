@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bgmagar.domain.Product;
 import com.bgmagar.service.ProductService;
 
 @RestController
-@RequestMapping("/")
 public class InventoryController {
 
 	@Autowired
@@ -37,7 +37,7 @@ public class InventoryController {
 	List<Product> pList = new ArrayList<Product>();
 
 	@RequestMapping(value = { "/", "/api" })
-	private String welcome() throws IOException {
+	private ModelAndView welcome() throws IOException {
 
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				getClass().getResourceAsStream("/help.html")));
@@ -45,12 +45,14 @@ public class InventoryController {
 		StringBuilder helpString = new StringBuilder();
 
 		String part = "";
+		
 		while ((part = reader.readLine()) != null) {
+			
 			helpString.append(part);
 		}
 		System.out.println(request.getRemoteAddr());;
 
-		return helpString.toString();
+		return new ModelAndView("index");
 	}
 
 	/**
@@ -66,7 +68,9 @@ public class InventoryController {
 		Map<Object,Object> metaMap = new HashMap<Object, Object>();
 		
 		map.put("products", productService.getProductList());
+		
 		metaMap.put("totalRecords", productService.getProductList().size());
+		
 		metaMap.put("page", 0);
 
 		map.put("meta",metaMap);
@@ -80,9 +84,10 @@ public class InventoryController {
 	 */
 	@RequestMapping(value = "/api/product/{id}", method = RequestMethod.GET)
 	private Object getProduct(@PathVariable int id) {
+		
 		addRequest(request.getLocalAddr());
+		
 		return productService.getProduct(id);
-
 	}
 	
 	/**
@@ -95,9 +100,7 @@ public class InventoryController {
 		
 		productService.addProduct(product);
 
-
 		return new ResponseEntity<Product>(HttpStatus.OK);
-
 	}
 
 	/**
@@ -117,12 +120,18 @@ public class InventoryController {
 	private void addRequest(String ip){
 		
 		if(requestMap.containsKey(ip)){
+			
 			Integer requestCount = requestMap.get(ip);
+			
 			requestCount++;
+			
 			requestMap.put(ip, requestCount);
+			
 			System.out.println("IP " + ip + " has sent request " + requestCount + " times");
 		}else{
+			
 			requestMap.put(ip, 1);
+			
 			System.out.println("IP " + ip + " has sent request first time");
 		}
 		

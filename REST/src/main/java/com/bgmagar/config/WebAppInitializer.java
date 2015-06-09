@@ -30,10 +30,14 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
 		dynamic.setLoadOnStartup(1);
 
-		FilterRegistration.Dynamic fr = servletContext.addFilter("corsFilter",
+		/**
+		 * Remove the below comments if your frontend web app is not inside this project.
+		 * The below code adds the CORS filter which is useful for cross origin request
+		 */
+/*		FilterRegistration.Dynamic fr = servletContext.addFilter("corsFilter",
 				new SimpleCORSFilter());
 
-		fr.addMappingForUrlPatterns(null, true, "/*");
+		fr.addMappingForUrlPatterns(null, true, "/*");*/
 		
 
 	}
