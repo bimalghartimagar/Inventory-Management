@@ -7,19 +7,17 @@ self.click = function(){
 }
 
 }])
-.controller('ProductListCtrl', ['ProductService', function(ProductService){
+.controller('ProductListCtrl', ['productList', function(productList){
 
 	var self = this;
 
-	self.products = [];
+	self.products = productList.data.products;
 
 	self.fieldName = 'id';
 
 	self.reverseSort = false;
 
-	ProductService.getProducts().then(function(response){
-		self.products = response.data.products;
-	})
+	
 
 }])
 .controller('ProductUpdateCtrl', ['ProductService','$location','$routeParams', function(ProductService, $location, $routeParams){

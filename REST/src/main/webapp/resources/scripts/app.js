@@ -4,7 +4,13 @@ angular.module('productApp', ['ngRoute'])
 		$routeProvider
 		.when('/products', {
 			templateUrl: 'resources/views/products.html',
-			controller: 'ProductListCtrl as productListCtrl'
+			controller: 'ProductListCtrl as productListCtrl',
+			resolve: {
+				productList: ['ProductService', function(ProductService){
+					return ProductService.getProducts();
+				}]
+				
+			}
 		})
 		.when('/product/edit/:id',{
 			templateUrl: 'resources/views/product.html',
