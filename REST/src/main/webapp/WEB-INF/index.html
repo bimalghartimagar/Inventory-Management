@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+<title></title>
 
-	<link rel="stylesheet" type="text/css" href="resources/styles/product_style.css">
-	<script type="text/javascript" src="resources/scripts/vendor/jquery-1.11.2.js"></script>
-	<script type="text/javascript" src="resources/scripts/vendor/angular.js"></script>
-	<script type="text/javascript" src="resources/scripts/vendor/angular-route.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="resources/styles/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="resources/styles/product_style.css">
+
+</head>
+<body ng-app="productApp">
+
+	<ng-include src="'resources/views/header.html'"></ng-include>
+
+	<div ng-view></div>
+	
+	<ng-include src="'resources/views/footer.html'"></ng-include>
+
+	<script type="text/javascript"
+		src="resources/scripts/vendor/jquery-1.11.2.js"></script>
+	<script type="text/javascript"
+		src="resources/scripts/vendor/angular.js"></script>
+	<script type="text/javascript"
+		src="resources/scripts/vendor/angular-route.js"></script>
 	<script type="text/javascript" src="resources/scripts/app.js"></script>
 	<script type="text/javascript" src="resources/scripts/services.js"></script>
 	<script type="text/javascript" src="resources/scripts/controllers.js"></script>
-</head>
-<body ng-app="productApp">
-	<h2>Products Application</h2>
-	<a href="#/products">Products</a>
-
-
-	<div ng-controller="HomeCtrl as homeCtrl">	
-	</div>
-
-	<div ng-view></div>
 </body>
 </html>

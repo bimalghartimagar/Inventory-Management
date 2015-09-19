@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bgmagar.dao.ProductDao;
+import com.bgmagar.domain.Category;
 import com.bgmagar.domain.Product;
 import com.bgmagar.service.ProductService;
 
@@ -34,6 +35,12 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public void updateProduct(int id, Product product) {
 		productDao.updateProduct(id, product);
+		
+	}
+
+	@Override
+	public List<Category> getCategoryList() {
+		return productDao.getCategoryList();
 		
 	}
 	
