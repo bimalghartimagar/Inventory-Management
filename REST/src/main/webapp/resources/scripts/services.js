@@ -3,7 +3,7 @@ angular.module('productApp')
 	.factory('ProductService', ['$http', function($http){
 		return {
 			getProducts: function(){
-				return $http.get('api/product');
+				return $http.get('api/product/');
 			},
 
 			getProduct: function(id){
@@ -11,11 +11,15 @@ angular.module('productApp')
 			},
 
 			addProduct: function(product){
-				return $http.put('api/product', product);
+				return $http.put('api/product/', product);
 			},
 
 			updateProduct: function(product, id){
 				return $http.put('api/product/'+id, product);
+			},
+			
+			getCategories: function(){
+				return $http.get('api/category/');
 			}
 		};
 	}]);

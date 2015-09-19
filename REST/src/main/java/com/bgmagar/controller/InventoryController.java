@@ -28,10 +28,10 @@ public class InventoryController {
 
 	@Autowired
 	private ProductService productService;
-	
+
 	@Autowired
 	private HttpServletRequest request;
-	
+
 	static private Map<String, Integer> requestMap = new HashMap<String, Integer>();
 
 	List<Product> pList = new ArrayList<Product>();
@@ -45,12 +45,13 @@ public class InventoryController {
 		StringBuilder helpString = new StringBuilder();
 
 		String part = "";
-		
+
 		while ((part = reader.readLine()) != null) {
-			
+
 			helpString.append(part);
 		}
-		System.out.println(request.getRemoteAddr());;
+		System.out.println(request.getRemoteAddr());
+		;
 
 		return new ModelAndView("index");
 	}
@@ -60,21 +61,21 @@ public class InventoryController {
 	 */
 	@RequestMapping(value = "/api/product", method = RequestMethod.GET)
 	private Map<String, Object> getProductList() {
-		
+
 		addRequest(request.getRemoteAddr());
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		Map<Object,Object> metaMap = new HashMap<Object, Object>();
-		
+
+		Map<Object, Object> metaMap = new HashMap<Object, Object>();
+
 		map.put("products", productService.getProductList());
-		
+
 		metaMap.put("totalRecords", productService.getProductList().size());
-		
+
 		metaMap.put("page", 0);
 
-		map.put("meta",metaMap);
-		
+		map.put("meta", metaMap);
+
 		return map;
 	}
 
@@ -84,12 +85,12 @@ public class InventoryController {
 	 */
 	@RequestMapping(value = "/api/product/{id}", method = RequestMethod.GET)
 	private Object getProduct(@PathVariable int id) {
-		
+
 		addRequest(request.getLocalAddr());
-		
+
 		return productService.getProduct(id);
 	}
-	
+
 	/**
 	 * Add person to the list
 	 * 
@@ -97,7 +98,7 @@ public class InventoryController {
 	 */
 	@RequestMapping(value = "/api/product", method = RequestMethod.PUT)
 	private ResponseEntity<Product> addProduct(@RequestBody Product product) {
-		
+
 		productService.addProduct(product);
 
 		return new ResponseEntity<Product>(HttpStatus.OK);
@@ -109,32 +110,45 @@ public class InventoryController {
 	 * @return HttpStatus.OK
 	 */
 	@RequestMapping(value = "/api/product/{id}", method = RequestMethod.PUT)
-	private ResponseEntity<Product> updateProduct(@PathVariable int id, @RequestBody Product product) {
-		
+	private ResponseEntity<Product> updateProduct(@PathVariable int id,
+			@RequestBody Product product) {
+
 		productService.updateProduct(id, product);
 
 		return new ResponseEntity<Product>(HttpStatus.OK);
 
 	}
-	
-	private void addRequest(String ip){
-		
-		if(requestMap.containsKey(ip)){
-			
+
+	@RequestMapping(value = "/api/category", method = RequestMethod.GET)
+	private Map<String, Object> getCategory() {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("categories", productService.getCategoryList());
+
+		return map;
+
+	}
+
+	private void addRequest(String ip) {
+
+		if (requestMap.containsKey(ip)) {
+
 			Integer requestCount = requestMap.get(ip);
-			
+
 			requestCount++;
-			
+
 			requestMap.put(ip, requestCount);
-			
-			System.out.println("IP " + ip + " has sent request " + requestCount + " times");
-		}else{
-			
+
+			System.out.println("IP " + ip + " has sent request " + requestCount
+					+ " times");
+		} else {
+
 			requestMap.put(ip, 1);
-			
+
 			System.out.println("IP " + ip + " has sent request first time");
 		}
-		
+
 	}
 
 }

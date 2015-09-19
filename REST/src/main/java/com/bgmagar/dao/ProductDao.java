@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.bgmagar.domain.Category;
 import com.bgmagar.domain.Product;
 
 
@@ -17,5 +18,7 @@ public interface ProductDao {
 	public void addProduct(Product product);
 	
 	public void updateProduct(int id, Product product);
+
+	public List<Category> getCategoryList();
 
 }

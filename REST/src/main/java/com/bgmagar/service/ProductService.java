@@ -2,6 +2,7 @@ package com.bgmagar.service;
 
 import java.util.List;
 
+import com.bgmagar.domain.Category;
 import com.bgmagar.domain.Product;
 
 public interface ProductService {
@@ -13,5 +14,7 @@ public interface ProductService {
 	public void addProduct(Product product);
 	
 	public void updateProduct(int id, Product product);
+
+	public List<Category> getCategoryList();
 
 }
